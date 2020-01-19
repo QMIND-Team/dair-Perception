@@ -1,0 +1,8 @@
+#!/bin/bash
+echo "Launching teleop with keyboard..."
+
+eval export TURTLEBOT3_MODEL=waffle_pi
+eval roslaunch turtlebot3_teleop turtlebot3_teleop_key.launch
+
+
+

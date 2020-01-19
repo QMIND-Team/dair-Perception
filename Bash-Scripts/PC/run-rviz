@@ -1,0 +1,10 @@
+#!/bin/bash 
+
+echo "Opening Rviz..."
+
+eval export TURTLEBOT3_MODEL=waffle_pi 
+eval roslaunch turtlebot3_bringup turtlebot3_remote.launch &
+# open new terminal
+xterm -hold -e rosrun rviz rviz -d `rospack find turtlebot3_description`/rviz/model.rviz
+
+ 
