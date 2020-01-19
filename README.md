@@ -1,4 +1,4 @@
-# DAIR-Reinforcement-Learning
+# DAIR-Perception
 
 Welcome to the official QMIND DAIR-Reinforcement-Learning Team! <br>
 Using AI to create slightly smarter robots
