@@ -1,0 +1,2 @@
+linear_controller:linear_controller_py
+-DCATKIN_DEVEL_PREFIX=/home/qmind/ROS/tutorial_ws/devel -DCMAKE_INSTALL_PREFIX=/home/qmind/ROS/tutorial_ws/install -G Unix Makefiles

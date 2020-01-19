@@ -1,0 +1,8 @@
+prefix=/home/qmind/ROS/tutorial_ws/devel
+
+Name: linear_controller_py
+Description: Description of linear_controller_py
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/qmind/ROS/tutorial_ws/devel/lib 
+Requires: 
