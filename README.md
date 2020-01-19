@@ -6,8 +6,8 @@ Using AI to create slightly smarter robots
 <img src="https://media.giphy.com/media/cFe3qUafjSxGM/giphy.gif" width="400" height="400" />
 
 ## Team Members:
-Sam Cantor <br>
-Adam Cooke <br>
-Buchi Maduekwe <br>
-Tanner Dunn <br>
-Ted Ecclestone <br>
+Sam Cantor - Project Manager<br>
+Adam Cooke - Algorithm Specialist<br>
+Buchi Maduekwe - Data Specialist<br>
+Tanner Dunn - Data Specialist<br>
+Ted Ecclestone - Control Systems Specialist<br>
