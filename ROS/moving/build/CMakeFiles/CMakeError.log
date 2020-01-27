@@ -1,0 +1,55 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/qmind/ROS/moving/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_91238/fast"
+/usr/bin/make -f CMakeFiles/cmTC_91238.dir/build.make CMakeFiles/cmTC_91238.dir/build
+make[1]: Entering directory '/home/qmind/ROS/moving/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_91238.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_91238.dir/CheckSymbolExists.c.o   -c /home/qmind/ROS/moving/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_91238
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_91238.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_91238.dir/CheckSymbolExists.c.o  -o cmTC_91238 -rdynamic 
+CMakeFiles/cmTC_91238.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_91238.dir/build.make:97: recipe for target 'cmTC_91238' failed
+make[1]: *** [cmTC_91238] Error 1
+make[1]: Leaving directory '/home/qmind/ROS/moving/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_91238/fast' failed
+make: *** [cmTC_91238/fast] Error 2
+
+File /home/qmind/ROS/moving/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/qmind/ROS/moving/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_1c7f6/fast"
+/usr/bin/make -f CMakeFiles/cmTC_1c7f6.dir/build.make CMakeFiles/cmTC_1c7f6.dir/build
+make[1]: Entering directory '/home/qmind/ROS/moving/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1c7f6.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_1c7f6.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.5/Modules/CheckFunctionExists.c
+Linking C executable cmTC_1c7f6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1c7f6.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_1c7f6.dir/CheckFunctionExists.c.o  -o cmTC_1c7f6 -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_1c7f6.dir/build.make:97: recipe for target 'cmTC_1c7f6' failed
+make[1]: *** [cmTC_1c7f6] Error 1
+make[1]: Leaving directory '/home/qmind/ROS/moving/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_1c7f6/fast' failed
+make: *** [cmTC_1c7f6/fast] Error 2
+
+
