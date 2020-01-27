@@ -20,3 +20,6 @@ Runs relevant commands to load the turtlebot in Rviz. Make sure to have [PC] `ro
 
 ## run-teleop
 Enables teleoperation for the turlebot using arrow keys on laptop. Previous steps apply.
+
+## gits
+Runs command `git status`, but with less characters needed. A simple but effective script for lazy programmers
