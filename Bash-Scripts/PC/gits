@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Slightly faster way to check git status
+eval git status
