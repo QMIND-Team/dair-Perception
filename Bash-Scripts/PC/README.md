@@ -6,9 +6,9 @@ Install Steps:
 - Create a new directory "bin" using `mkdir bin`  
 - Navigate to directory using `cd bin` and place bash scripts inside  
 - Make scripts executable by running command `chmod +x [name of script]`  
-<br>
-Usage:  <br>
-From any directory:  <br>
+<br><br>
+Usage:  
+From any directory:  
 ```
 [name of command]
 Ex:
