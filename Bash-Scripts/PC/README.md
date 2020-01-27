@@ -1,0 +1,16 @@
+# PC Bash Scripts
+These are a few simple bash scripts developed by the team to make some of the setup easier.  
+Install Steps:  
+- Navigate to home directory using command `cd ~`  
+- Create a new directory "bin" using `mkdir bin`  
+- Navigate to directory using `cd bin` and place bash scripts inside  
+- Make scripts executable by running command `chmod +x [name of script]`  
+Usage:  
+From any directory:
+```
+[name of command]
+Ex:
+run-rviz
+```
+
+## run-rviz
