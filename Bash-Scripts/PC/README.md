@@ -1,14 +1,14 @@
 # PC Bash Scripts
 These are a few simple bash scripts developed by the team to make some of the setup easier.  
 <br>
-Install Steps:  
+### Install Steps:  
 - Navigate to home directory using command `cd ~`  
 - Create a new directory "bin" using `mkdir bin`  
 - Navigate to directory using `cd bin` and place bash scripts inside  
 - Make scripts executable by running command `chmod +x [name of script]`  
 <br><br>
-Usage:  
-From any directory:  
+### Usage:  
+From any directory... 
 ```
 [name of command]
 Ex:
