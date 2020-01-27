@@ -17,3 +17,6 @@ run-rviz
 
 ## run-rviz
 Runs relevant commands to load the turtlebot in Rviz. Make sure to have [PC] `roscore` and [Pi] `./bringup.sh` running in separate terminals first.
+
+## run-teleop
+Enables teleoperation for the turlebot using arrow keys on laptop. Previous steps apply.
