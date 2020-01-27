@@ -10,21 +10,21 @@ def move():
 
     #Receiveing the user's input
     print("Let's move your robot!")
-    speed = input("Input your speed:")
-    distance = input("Type your distance:")
-    isForward = input("Foward?: ")#True or False
+    speed = input("Input your speed: (m/s)")
+    distance = input("Type your distance: (m)")
+    isForward = input("Foward?: (True/False)")#True or False
 
     #Checking if the movement is forward or backwards
     if(isForward):
-        vel_msg.linear.x = 0#abs(speed)
+        vel_msg.linear.x = abs(speed)
     else:
-        vel_msg.linear.x = 0#-abs(speed)
+        vel_msg.linear.x = -abs(speed)
     #Since we are moving just in x-axis
     vel_msg.linear.y = 0
     vel_msg.linear.z = 0
     vel_msg.angular.x = 0
     vel_msg.angular.y = 0
-    vel_msg.angular.z = 0.5
+    vel_msg.angular.z = 0
 
     while not rospy.is_shutdown():
 
