@@ -8,7 +8,7 @@ Install Steps:
 - Make scripts executable by running command `chmod +x [name of script]`  
 <br>
 Usage:  
-From any directory:
+From any directory:  
 ```
 [name of command]
 Ex:
@@ -16,3 +16,4 @@ run-rviz
 ```
 
 ## run-rviz
+Runs relevant commands to load the turtlebot in Rviz. Make sure to have [PC] `roscore` and [Pi] `./bringup.sh` running in separate terminals first.
