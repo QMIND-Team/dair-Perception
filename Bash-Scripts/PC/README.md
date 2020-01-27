@@ -7,8 +7,8 @@ Install Steps:
 - Navigate to directory using `cd bin` and place bash scripts inside  
 - Make scripts executable by running command `chmod +x [name of script]`  
 <br>
-Usage:  
-From any directory:  
+Usage:  <br>
+From any directory:  <br>
 ```
 [name of command]
 Ex:
