@@ -1,0 +1,2 @@
+C:\Users\samca\repos\dair-SearchAndRescue\Model-Testing\Data\Tim-Hortons-Cup\images-and-labels\timhortons10.jpg
+C:\Users\samca\repos\dair-SearchAndRescue\Model-Testing\Data\Tim-Hortons-Cup\images-and-labels\timhortons20.jpg
