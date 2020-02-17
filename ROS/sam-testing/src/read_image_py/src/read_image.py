@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # Goal of this program is to read images from the robot and try to process them
 import sys, time
@@ -14,28 +14,41 @@ from sensor_msgs.msg import CompressedImage
 # OpenCV2 used to save image
 import cv2
 
+MODEL = "yolov3.weights"
+CFG = "yolov3.cfg"
+
 #Instantiate CvBridge
 # bridge = CvBridge()
 
 from matplotlib import pyplot as plt
+from utils import *
+from darknet import Darknet
 
 VERBOSE = False
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 
-# Load YOLO
-net = cv2.dnn.readNet("yolov3.weights","yolov3.cfg")
-classes = []
-with open("coco.names","r") as f:
-    classes = [line.strip() for line in f.readlines()]
-layer_names = net.getLayerNames()
-outputlayers = [layer_names[i[0]-1]for i in net.getUnconnectedOutLayers()]
-colors = np.random.uniform(0,255,size=(len(classes),3))
+# YOLO setup
+cfg_file='yolov3.cfg'
+weight_file='yolov3.weights'
+namesfile='coco.names'
+
+m = Darknet(cfg_file)
+m.load_weights(weight_file)
+class_names = load_class_names(namesfile)
+
+# Set the NMS threshold
+nms_thresh = 0.6  
+
+# Set the IOU threshold
+iou_thresh = 0.4
+
+
 
 def image_callback(msg):
     print("Received an image!")
     if VERBOSE:
-        print 'received image of type: "%s"' % msg.format
+        print('received image of type: ') # "%s"' % msg.format
 
     # convert to cv2
     np_arr = np.fromstring(msg.data, np.uint8)
@@ -61,51 +74,35 @@ def image_callback(msg):
     Trying pre-trained yolo (instantiation above)
     '''
 
-    # Detecting objects
-    blob = cv2.dnn.blobFromImage(image_np, 0.00392, (416,316), (0,0,0), True, crop=False)
+    # Set the default figure size
+    plt.rcParams['figure.figsize'] = [24.0, 14.0]
 
-    net.setInput(blob)
-    outs = net.forward(outputlayers)
+    # Load the image
+    img = image_np
 
-    class_ids=[]
-    confidences=[]
-    boxes=[]
+    # Convert the image to RGB
+    original_image = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
-    for out in outs:
-        for detection in out:
-            scores = detection[5:]
-            class_id = np.argmax(scores)
-            confidence = scores[class_id]
-            if confidence > 0.5:
-                center_x = int(detection[0]*width)
-                center_y = int(detection[1]*height)
-                w = int(detection[2]*width)
-                h = int(detection[3]*height)
+    # We resize the image to the input width and height of the first layer of the network.    
+    resized_image = cv2.resize(original_image, (m.width, m.height))
 
-                x=int(center_x - w/2)
-                y=int(center_y - h/2)
-                
-                boxes.append([x,y,w,h])
-                confidences.append(float(confidence))
-                class_ids.append(class_id)
-    indexes = cv2.dnn.NMSBoxes(boxes, confidences, 0.5, 0.4)
-
-    font = cv2.FONT_HERSHEY_DUPLEX
-    for i in range(len(boxes)):
-        if i in indexes:
-            x, y, w, h = boxes[i]
-            label = str(classes[class_ids[i]])
-            color = colors[i]
-            cv2.rectangle(image_np, (x, y), (x + w, y + h), color, 2)
-            cv2.putText(image_np, label, (x, y + 30), font, 3, color, 3)
+    # Detect objects in the image
+    boxes = detect_objects(m, resized_image, iou_thresh, nms_thresh)
 
 
     '''
     Displaying the final image
     '''
-    cv2.imshow('cv_img', image_np)
-    cv2.waitKey(0)
-    cv2.imwrite('./photos/test.jpg', image_np)
+    # Print the objects found and the confidence level
+    print_objects(boxes, class_names)
+
+    #Plot the image with bounding boxes and corresponding object class labels
+    plot_boxes(original_image, boxes, class_names, plot_labels = True)
+
+
+    # cv2.imshow('cv_img', img)
+    # cv2.waitKey(0)
+    # cv2.imwrite('./photos/test.jpg', img)
 
 
 def main():
