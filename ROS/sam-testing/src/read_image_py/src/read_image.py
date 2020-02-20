@@ -2,6 +2,7 @@
 
 # Goal of this program is to read images from the robot and try to process them
 import sys, time
+import subprocess
 import numpy as np 
 from scipy.ndimage import filters
 
@@ -29,8 +30,8 @@ VERBOSE = False
 font = cv2.FONT_HERSHEY_SIMPLEX
 
 # YOLO setup
-cfg_file='yolov3.cfg'
-weight_file='yolov3.weights'
+cfg_file='cfg/yolov3.cfg'
+weight_file='weights/yolov3.weights'
 namesfile='coco.names'
 
 m = Darknet(cfg_file)
