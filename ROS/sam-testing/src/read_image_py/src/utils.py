@@ -197,27 +197,27 @@ def plot_boxes(img, boxes, class_names, plot_labels, color = None):
     a.imshow(img)
     
     # Plot the bounding boxes and corresponding labels on top of the image
-    for i in range(len(boxes)):
+    for i,box in enumerate(boxes):
         
-        # Get the ith bounding box
-        box = boxes[i]
+        object_name = box[0]
+        confidence = box[1]
+        print('Object {}: {}'.format(i+1,object_name))
         
-        # Get the (x,y) pixel coordinates of the lower-left and lower-right corners
-        # of the bounding box relative to the size of the image. 
-        x1 = int(np.around((box[0] - box[2]/2.0) * width))
-        y1 = int(np.around((box[1] - box[3]/2.0) * height))
-        x2 = int(np.around((box[0] + box[2]/2.0) * width))
-        y2 = int(np.around((box[1] + box[3]/2.0) * height))
+        # Get the (x,y) pixel coordinates of the center of box
+        # along with the width and height of box
+        x = box[2][0]
+        y = box[2][1]
+        box_width = box[2][2]
+        box_height = box[2][3]
+        
         
         # Set the default rgb value to red
         rgb = (1, 0, 0)
             
         # Use the same color to plot the bounding boxes of the same object class
-        if len(box) >= 7 and class_names:
-            cls_conf = box[5]
-            cls_id = box[6]
+        if class_names:
             classes = len(class_names)
-            offset = cls_id * 123457 % classes
+            offset = class_names.index(object_name) * 123457 % classes
             red   = get_color(2, offset, classes) / 255
             green = get_color(1, offset, classes) / 255
             blue  = get_color(0, offset, classes) / 255
@@ -228,17 +228,17 @@ def plot_boxes(img, boxes, class_names, plot_labels, color = None):
             else:
                 rgb = color
         
-        # Calculate the width and height of the bounding box relative to the size of the image.
-        width_x = x2 - x1
-        width_y = y1 - y2
+        # Bottom-left coordinates of box (used for matplotlib patches.Rectangle)
+        lx = x - box_width/2
+        by = y - box_height/2
         
-        # Set the postion and size of the bounding box. (x1, y2) is the pixel coordinate of the
-        # lower-left corner of the bounding box relative to the size of the image.
-        rect = patches.Rectangle((x1, y2),
-                                 width_x, width_y,
-                                 linewidth = 2,
+        # Set the postion and size of the bounding box
+        rect = patches.Rectangle((lx, by),
+                                 box_width, box_height,
+                                 linewidth = 3,
                                  edgecolor = rgb,
-                                 facecolor = 'none')
+                                 facecolor = None,
+                                 fill = False)
 
         # Draw the bounding box on top of the image
         a.add_patch(rect)
@@ -247,15 +247,15 @@ def plot_boxes(img, boxes, class_names, plot_labels, color = None):
         if plot_labels:
             
             # Create a string with the object class name and the corresponding object class probability
-            conf_tx = class_names[cls_id] + ': {:.1f}'.format(cls_conf)
+            conf_tx = object_name + ': {:.3f}'.format(confidence)
             
             # Define x and y offsets for the labels
             lxc = (img.shape[1] * 0.266) / 100
             lyc = (img.shape[0] * 1.180) / 100
             
             # Draw the labels on top of the image
-            a.text(x1 + lxc, y1 - lyc, conf_tx, fontsize = 24, color = 'k',
+            a.text(lx + lxc, y + box_height/2 - lyc, conf_tx, fontsize = 15, color = 'k',
                    bbox = dict(facecolor = rgb, edgecolor = rgb, alpha = 0.8))        
-        
+    print('\n')
     # plt.show()
-    plt.savefig('bounded-image.jpg')
+    plt.savefig('photos/bounded-image.jpg')

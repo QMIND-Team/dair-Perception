@@ -2,6 +2,7 @@ from ctypes import *
 import math
 import random
 import os
+import time
 
 def sample(probs):
     s = sum(probs)
@@ -143,16 +144,17 @@ def detect(net, meta, image, thresh=.5, hier_thresh=.5, nms=.45):
     free_image(im)
     free_detections(dets, num)
     return res
+
+net = load_net("cfg/yolov3.cfg", "weights/yolov3.weights", 0)
+meta = load_meta("cfg/coco.data")
     
-if __name__ == "__main__":
-    #net = load_net("cfg/densenet201.cfg", "/home/pjreddie/trained/densenet201.weights", 0)
-    #im = load_image("data/wolf.jpg", 0, 0)
-    #meta = load_meta("cfg/imagenet1k.data")
-    #r = classify(net, meta, im)
-    #print r[:10]
-    net = load_net("cfg/yolov3.cfg", "weights/yolov3.weights", 0)
-    meta = load_meta("cfg/coco.data")
-    r = detect(net, meta, "data/test-photo.jpg")
-    print r
+
+def findObjects(photo):
+    start = time.time()
+    r = detect(net, meta, photo)
+    finish = time.time()
+    speed = finish - start
+    # print r
+    return r, speed
     
 
