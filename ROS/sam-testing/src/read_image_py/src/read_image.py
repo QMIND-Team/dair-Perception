@@ -32,10 +32,11 @@ class image_read:
     def __init__(self):
         '''Initialize ROS publisher and subscriber'''
         #publish topic
-        self.image_pub = rospy.Publisher("/Object_Detection/bounded_image/compressed", CompressedImage, queue_size=1)
+        self.image_pub = rospy.Publisher("/Object_Detection/bounded_image/compressed", CompressedImage)
         #subscribed topic
         image_topic = "/raspicam_node/image/compressed"
-        self.subscriber = rospy.Subscriber(image_topic, CompressedImage, self.callback, queue_size=1)
+        buffer_size = 52428800
+        self.subscriber = rospy.Subscriber( image_topic, CompressedImage, self.callback, queue_size=1, buff_size=buffer_size)
 
     def callback(self, msg):
         print('\nReceived an image!')
@@ -59,6 +60,8 @@ class image_read:
         if (speed < 0.5):
             time.sleep(0.5-speed)
 
+        start = time.time()
+
         # Create a new image with the predicted boxes and labels
         plot_boxes(image_np, res, class_names, plot_labels = True)
       
@@ -76,6 +79,10 @@ class image_read:
         msg.data = np.array(cv2.imencode('.jpg', box_arr)[1]).tostring()
         # Publish new image
         self.image_pub.publish(msg)
+
+        finish = time.time()
+
+        print 'I took {:.3f}'.format(finish-start), 'seconds to finish the remaining processes (boxes, publish)'
 
 
 def main(args):
