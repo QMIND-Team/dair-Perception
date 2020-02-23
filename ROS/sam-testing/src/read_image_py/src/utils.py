@@ -257,5 +257,6 @@ def plot_boxes(img, boxes, class_names, plot_labels, color = None):
             a.text(lx + lxc, y + box_height/2 - lyc, conf_tx, fontsize = 15, color = 'k',
                    bbox = dict(facecolor = rgb, edgecolor = rgb, alpha = 0.8))        
     print('\n')
-    # plt.show()
-    plt.savefig('photos/bounded-image.jpg')
+
+    # save as image
+    plt.savefig('photos/bounded-image.png')
