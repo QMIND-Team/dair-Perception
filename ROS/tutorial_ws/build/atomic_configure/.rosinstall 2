@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/qmind/ROS/tutorial_ws/devel/setup.sh
