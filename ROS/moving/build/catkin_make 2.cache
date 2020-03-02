@@ -1,0 +1,2 @@
+move_forward_py
+-DCATKIN_DEVEL_PREFIX=/home/qmind/ROS/moving/devel -DCMAKE_INSTALL_PREFIX=/home/qmind/ROS/moving/install -G Unix Makefiles

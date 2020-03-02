@@ -1,0 +1,9 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" name="run_script">Run script</button>
+</form>
+</html>

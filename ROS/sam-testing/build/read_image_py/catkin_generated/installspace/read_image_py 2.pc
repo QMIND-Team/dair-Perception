@@ -1,0 +1,8 @@
+prefix=/home/qmind/ROS/sam-testing/install
+
+Name: read_image_py
+Description: Description of read_image_py
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/qmind/ROS/sam-testing/install/lib 
+Requires: 
