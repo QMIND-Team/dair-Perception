@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+
+import rospy
+
+from std_msgs.msg import Float64
+from geometry_msgs.msg import Twist
+from nav_msgs.msg import Odometry
+
+##############
+# Parameters #
+##############
+P_GAIN = 4
+
+
+
+
+#initialize the node
+rospy.init_node('linear_controller')
+
+#create the controller
+controller = LinearController(P_GAIN)
+
+#wait for messages on topic, go to callback function when new messages arrive
+rospy.spin()

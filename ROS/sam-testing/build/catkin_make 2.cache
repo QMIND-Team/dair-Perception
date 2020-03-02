@@ -1,0 +1,2 @@
+read_image_py
+-DCATKIN_DEVEL_PREFIX=/home/qmind/ROS/sam-testing/devel -DCMAKE_INSTALL_PREFIX=/home/qmind/ROS/sam-testing/install -G Unix Makefiles
