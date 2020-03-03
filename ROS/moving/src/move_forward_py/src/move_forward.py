@@ -1,52 +1,36 @@
-#!/usr/bin/env python
 import rospy
-from geometry_msgs.msg import Twist
-
-def move():
-    # Starts a new node
-    rospy.init_node('robot_cleaner', anonymous=True)
-    velocity_publisher = rospy.Publisher('cmd_vel', Twist, queue_size=10)
+# from std_msgs.msg import Movement
+from geometry_msgs.msg import *
+import math
+rospy.init_node('image_listener', anonymous=True)
+def MovementCallback(msg):
     vel_msg = Twist()
+    # if(msg.x >= 0):
+    #     if(msg.x > 320):
+    #         vel_msg.linear.x = 0
+    #         vel_msg.linear.y = 0
+    #         vel_msg.linear.z = 0
+    #         vel_msg.angular.z = -0.5
+    #         vel_msg.angular.y = 0
+    #         vel_msg.angular.x = 0
+    #     else:
+    #         vel_msg.linear.x = 0
+    #         vel_msg.linear.y = 0
+    #         vel_msg.linear.z = 0
+    #         vel_msg.angular.z = 0.5
+    #         vel_msg.angular.y = 0
+    #         vel_msg.angular.x = 0
 
-    #Receiveing the user's input
-    print("Let's move your robot!")
-    speed = input("Input your speed: (m/s)")
-    distance = input("Type your distance: (m)")
-    isForward = input("Foward?: (True/False)")#True or False
 
-    #Checking if the movement is forward or backwards
-    if(isForward):
-        vel_msg.linear.x = abs(speed)
+    # Angular velocity proportional control
+    target = 320
+    gain = 0.0005*2
+    if (msg.x >= 0):
+        error = (target-msg.x)
+        vel_msg.angular.z = gain*error
     else:
-        vel_msg.linear.x = -abs(speed)
-    #Since we are moving just in x-axis
-    vel_msg.linear.y = 0
-    vel_msg.linear.z = 0
-    vel_msg.angular.x = 0
-    vel_msg.angular.y = 0
-    vel_msg.angular.z = 0
-
-    while not rospy.is_shutdown():
-
-        #Setting the current time for distance calculus
-        t0 = rospy.Time.now().to_sec()
-        current_distance = 0
-
-        #Loop to move the turtle in an specified distance
-        while(current_distance < distance):
-            #Publish the velocity
-            velocity_publisher.publish(vel_msg)
-            #Takes actual time to velocity calculus
-            t1=rospy.Time.now().to_sec()
-            #Calculates distancePoseStamped
-            current_distance= speed*(t1-t0)
-        #After the loop, stops the robot
-        vel_msg.linear.x = 0
-        #Force the robot to stop
-        velocity_publisher.publish(vel_msg)
-
-if __name__ == '__main__':
-    try:
-        #Testing our function
-        move()
-    except rospy.ROSInterruptException: pass
+        vel_msg.angular.z = 0
+    velocity_publisher.publish(vel_msg)
+velocity_publisher = rospy.Publisher("/cmd_vel", Twist, queue_size=1)
+rospy.Subscriber("/Object_Locations", Point32, MovementCallback)
+rospy.spin()

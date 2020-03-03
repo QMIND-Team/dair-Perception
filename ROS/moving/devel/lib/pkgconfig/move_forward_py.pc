@@ -1,8 +1,8 @@
-prefix=/home/qmind/ROS/moving/devel
+prefix=/home/qmind/dair-Perception/ROS/moving/devel
 
 Name: move_forward_py
 Description: Description of move_forward_py
 Version: 0.0.0
 Cflags: 
-Libs: -L/home/qmind/ROS/moving/devel/lib 
+Libs: -L/home/qmind/dair-Perception/ROS/moving/devel/lib 
 Requires: 

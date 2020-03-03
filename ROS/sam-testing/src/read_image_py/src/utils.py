@@ -172,7 +172,7 @@ def print_objects(boxes, class_names):
             print('%i. %s: %f' % (i + 1, class_names[cls_id], cls_conf))
 
             
-def plot_boxes(img, boxes, class_names, plot_labels, color = None):
+def plot_boxes(img, boxes, class_names, item, plot_labels, color = None):
     
     # Define a tensor used to set the colors of the bounding boxes
     colors = torch.FloatTensor([[1,0,1],[0,0,1],[0,1,1],[0,1,0],[1,1,0],[1,0,0]])
@@ -195,6 +195,9 @@ def plot_boxes(img, boxes, class_names, plot_labels, color = None):
     # Create a figure and plot the image
     fig, a = plt.subplots(1,1)
     a.imshow(img)
+
+    found = False
+    coord = 0
     
     # Plot the bounding boxes and corresponding labels on top of the image
     for i,box in enumerate(boxes):
@@ -202,6 +205,7 @@ def plot_boxes(img, boxes, class_names, plot_labels, color = None):
         object_name = box[0]
         confidence = box[1]
         print('Object {}: {}'.format(i+1,object_name))
+
         
         # Get the (x,y) pixel coordinates of the center of box
         # along with the width and height of box
@@ -210,6 +214,10 @@ def plot_boxes(img, boxes, class_names, plot_labels, color = None):
         box_width = box[2][2]
         box_height = box[2][3]
         
+        if object_name == item:
+            print('found the desired object!\n name: {} \t x: {}'.format(object_name, x))
+            found = True
+            coord = x
         
         # Set the default rgb value to red
         rgb = (1, 0, 0)
@@ -260,3 +268,5 @@ def plot_boxes(img, boxes, class_names, plot_labels, color = None):
 
     # save as image
     plt.savefig('photos/bounded-image.png')
+
+    return found, coord
