@@ -26,6 +26,7 @@ from utils import *
 VERBOSE = False 
 namesfile='data/coco.names'
 class_names = load_class_names(namesfile)
+desired_object = ''
 
 
 class image_read:
@@ -59,7 +60,7 @@ class image_read:
 
         # Print the time it took to detect objects
         print 'It took {:.3f}'.format(speed), 'seconds to detect the objects in the image.'
-        # Limit framerate to roughly 4fps to decrease computer load
+        # Limit framerate to roughly 5fps to decrease computer load
         # if (speed < 0.20):
         #     time.sleep(0.20-speed)
 
@@ -103,6 +104,10 @@ class image_read:
 
 
 def main(args):
+    try:
+        global.desired_object = args
+    except NameError:
+        global.desired_object = 'clock'
     ic = image_read()
     rospy.init_node('image_listener', anonymous=True)
     try:
