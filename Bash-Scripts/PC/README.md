@@ -16,10 +16,10 @@ run-rviz
 ```
 ## start-image-view
 This will run the object detection model through the Turtlebot camera, and publish a stream of compressed images containing the predicted bounding boxes.  
-Run these first:
+#### Run these first:
 * roscore
 * bringup (pi)
-* camera (pi)
+* camera (pi)  
 
 ## run-rviz
 Runs relevant commands to load the turtlebot in Rviz. Make sure to have [PC] `roscore` and [Pi] `./bringup.sh` running in separate terminals first.
