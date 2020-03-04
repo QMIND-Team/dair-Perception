@@ -1,0 +1,2 @@
+
+-DCATKIN_DEVEL_PREFIX=/home/qmind/dair-Perception/ROS/demo/devel -DCMAKE_INSTALL_PREFIX=/home/qmind/dair-Perception/ROS/demo/install -G Unix Makefiles
