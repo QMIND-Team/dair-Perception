@@ -107,7 +107,7 @@ def main(args):
     try:
         global.desired_object = args
     except NameError:
-        global.desired_object = 'clock'
+        global.desired_object = 'None'
     ic = image_read()
     rospy.init_node('image_listener', anonymous=True)
     try:
