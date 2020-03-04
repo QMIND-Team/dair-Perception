@@ -21,7 +21,7 @@ This will run the object detection model through the Turtlebot camera, and publi
 * bringup (pi)
 * camera (pi)
 * run-rviz *(recommended)*
-<br>
+<br><br>
 ## start-movement
 Will launch the movement script, subscribes to the object-detection output and implements a navigation algorithm to locate and approach an object of choice. Can be exited using `stop-movement`
 <br>
