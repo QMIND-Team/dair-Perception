@@ -1,0 +1,4 @@
+#!/bin/bash
+
+xterm -hold -e echo "Starting Image 000Read..."
+echo "test

@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "Launching image script..."
+
+cd ~/dair-Perception/ROS/sam-testing/src/read_image_py/src
+eval python read_image.py 

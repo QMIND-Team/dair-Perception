@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Displays the bounded box images using image transport
+eval rosrun image_view image_view image:=/Object_Detection/bounded_image compressed

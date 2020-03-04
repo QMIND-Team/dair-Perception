@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Starts the movement script
+echo Starting Movement Script...
+
+# Navigate to directory
+cd ~/dair-Perception/ROS/demo/src/movement_py/src/
+
+# Commands to run in new terminal:
+cmd1='echo Movement Script Running...'
+cmd2='python movement.py'
+
+cmd3='sleep 1'
+cmd4='temp=$(pgrep -f movement.py)'
+cmd5='echo $temp > movementPID.txt'
+
+# Generate temporary bash scripts for new terminals
+tempScript1=$(mktemp -u) || { echo "temp script 1 generate error"; exit1;}
+echo '#!/bin/bash' > $tempScript1
+echo "$cmd1 & $cmd2" >> $tempScript1
+chmod +x $tempScript1
+
+tempScript2=$(mktemp -u) || { echo "temp script 2 generate error"; exit1;}
+echo '#!/bin/bash' > $tempScript2
+echo "$cmd3 && $cmd4 && $cmd5" >> $tempScript2
+chmod +x $tempScript2
+
+# Run commands in new terminal
+xterm -hold -e "$tempScript1" &
+xterm -e "$tempScript2"

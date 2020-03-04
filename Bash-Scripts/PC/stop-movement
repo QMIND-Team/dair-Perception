@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Stops the movement script
+echo Stopping Movement Script...
+
+# Navigate to directory
+cd ~/dair-Perception/ROS/demo/src/movement_py/src/
+
+# Read PID and kill process
+PID=$(head -1 movementPID.txt)
+eval kill -SIGINT $PID
+
