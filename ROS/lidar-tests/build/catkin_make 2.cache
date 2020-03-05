@@ -1,0 +1,2 @@
+
+-DCATKIN_DEVEL_PREFIX=/home/qmind/dair-Perception/ROS/lidar-tests/devel -DCMAKE_INSTALL_PREFIX=/home/qmind/dair-Perception/ROS/lidar-tests/install -G Unix Makefiles
