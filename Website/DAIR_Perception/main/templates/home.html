@@ -72,6 +72,12 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
       <option value="giraffe">Giraffe</option>
       <option value="pottedplant">Plant</option>
     </select>
+
+    <form action="{% url 'launch' %}" method="POST">
+      {% csrf_token %}
+      <button type="submit">Launch</button>
+  </form>
+
   </div>
 
 <!-- END PAGE CONTENT -->
