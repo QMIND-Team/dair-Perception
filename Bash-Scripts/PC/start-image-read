@@ -8,16 +8,19 @@ cd ~/dair-Perception/ROS/demo/src/image_processing_py/src/
 
 # Commands to run in new terminal:
 cmd1='echo Starting Image Read...'
-cmd2='python image_processing.py'
+cmd2='python image_processing.py $object'
 
 cmd3='sleep 1'
 cmd4='temp=$(pgrep -f image_processing.py)'
 cmd5='echo $temp > imagePID.txt'
 
+cmd6='sleep 10'
+cmd7='eval start-movement'
+
 # Generate temporary bash scripts for new terminals
 tmpScript1=$(mktemp -u) || { echo "temp script 1 generate error"; exit1;}
 echo '#!/bin/bash' > $tmpScript1
-echo "$cmd1 & $cmd2" >> $tmpScript1
+echo "python image_processing.py $1" >> $tmpScript1
 chmod +x $tmpScript1
 
 tmpScript2=$(mktemp -u) || { echo "temp script 2 generate error"; exit1;}
@@ -25,6 +28,12 @@ echo '#!/bin/bash' > $tmpScript2
 echo "$cmd3 && $cmd4 && $cmd5" >> $tmpScript2
 chmod +x $tmpScript2
 
+tmpScript3=$(mktemp -u) || { echo "temp script 3 generate error"; exit1;}
+echo '#!/bin/bash' > $tmpScript3
+echo "$cmd6 && $cmd7" >> $tmpScript3
+chmod +x $tmpScript3
+
 # Run commands in new terminal
 xterm -e "$tmpScript1" &
-xterm -e "$tmpScript2"
+xterm -e "$tmpScript2" &
+xterm -e "$tmpScript3"

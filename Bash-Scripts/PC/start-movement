@@ -26,5 +26,5 @@ echo "$cmd3 && $cmd4 && $cmd5" >> $tempScript2
 chmod +x $tempScript2
 
 # Run commands in new terminal
-xterm -hold -e "$tempScript1" &
+xterm -e "$tempScript1" &
 xterm -e "$tempScript2"

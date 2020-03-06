@@ -32,7 +32,8 @@ desired_object = ''
 class image_read:
 
     def __init__(self):
-        self.item = raw_input('What are you looking for: ')
+        global desired_object
+        print 'Object to look for: {}'.format(desired_object)
         '''Initialize ROS publisher and subscriber'''
         #publish topics
         self.image_pub = rospy.Publisher("/Object_Detection/bounded_image/compressed", CompressedImage, queue_size=1)
@@ -43,6 +44,8 @@ class image_read:
         self.subscriber = rospy.Subscriber( image_topic, CompressedImage, self.callback, queue_size=1, buff_size=2**24)
 
     def callback(self, msg):
+        global desired_object
+
         print('\nReceived an image!')
         if VERBOSE:
             print 'received image of type: "%s"' % msg.format
@@ -67,7 +70,7 @@ class image_read:
         start = time.time()
 
         # Create a new image with the predicted boxes and labels
-        found, coord = plot_boxes(image_np, res, class_names, self.item, plot_labels = True)
+        found, coord = plot_boxes(image_np, res, class_names, desired_object, plot_labels = True)
       
         # Read the image with boxes
         box_arr = misc.imread('photos/bounded-image.png')
@@ -104,10 +107,13 @@ class image_read:
 
 
 def main(args):
+    # If called with a parameter, set that parameter to the desired object
+    global desired_object
+    print 'args: ', args
     try:
-        global.desired_object = args
+        desired_object = args[1]
     except NameError:
-        global.desired_object = 'None'
+        desired_object = 'None'
     ic = image_read()
     rospy.init_node('image_listener', anonymous=True)
     try:

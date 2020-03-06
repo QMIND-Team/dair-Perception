@@ -1,5 +1,37 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+import subprocess
+
+def launchClock(request):
+    if request.POST:
+        subprocess.call(['start-image-read', 'clock'])
+
+    return render(request,'home.html',{})
+
+def launchBottle(request):
+    if request.POST:
+        subprocess.call(['start-image-read', 'bottle'])
+
+    return render(request,'home.html',{})
+
+def launchGiraffe(request):
+    if request.POST:
+        subprocess.call(['start-image-read', 'giraffe'])
+
+    return render(request,'home.html',{})
+
+def launchPlant(request):
+    if request.POST:
+        subprocess.call(['start-image-read', 'pottedplant'])
+
+    return render(request,'home.html',{})
+
+def stop(request):
+    if request.POST:
+        subprocess.call('stop-image-read')
+
+    return render(request,'home.html',{})
+
 
 def robot(request):
     return render(request, 'home.html')

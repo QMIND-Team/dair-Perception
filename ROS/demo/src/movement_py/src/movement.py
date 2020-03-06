@@ -10,7 +10,7 @@ class move_bot:
 
     def __init__(self):
         self.velocity_publisher = rospy.Publisher("/cmd_vel", Twist, queue_size=1)
-        self.subscriber  = rospy.Subscriber("/Object_Locations", Point32, self.MovementCallback, queue_size=1, buff_size=2**24)
+        self.subscriber  = rospy.Subscriber("/Object_Locations", Point32, self.MovementCallback, queue_size=1)#, buff_size=2**24)
 
     def laser_scan(self):
         ranges_scan=[]
@@ -38,9 +38,10 @@ class move_bot:
         # Find point of min range
         minDist = 1000 # just needs to be some high number
         for i in range(0,len(ranges_scan)):
-            if ranges_scan[i][1] < minDist:
+            if ranges_scan[i][1] < minDist and ranges_scan[i][1] > 0:
                 minDist = ranges_scan[i][1]
                 minAngle = ranges_scan[i][0]
+        print 'ranges: {}'.format(minDist)
         if (msg.x >= 0):
             target = 0.4
             error = -1*(target - minDist)
@@ -58,6 +59,7 @@ class move_bot:
             vel_msg.linear.x = 0
             vel_msg.angular.z = -0.2
         self.velocity_publisher.publish(vel_msg)
+        print 'end of callback'
     
 
 def main(args):
