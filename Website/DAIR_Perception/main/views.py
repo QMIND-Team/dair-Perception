@@ -1,5 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+import subprocess
+
+def launch(request):
+    if request.POST:
+        subprocess.call('/home/user/test.sh')
+
+    return render(request,'home.html',{})
 
 def robot(request):
     return render(request, 'home.html')
