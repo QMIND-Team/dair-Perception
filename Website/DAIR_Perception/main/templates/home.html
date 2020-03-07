@@ -17,6 +17,31 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 #main {margin-left: 120px}
 /* Remove margins from "page content" on small screens */
 @media only screen and (max-width: 600px) {#main {margin-left: 0}}
+.button {
+  font-size : 24px;
+  background-color: rgb(10, 108, 236);
+  border: none;
+}
+.button:hover {
+  background-color: #4CAF50;
+}
+table {
+    width: 100%;
+  }
+td {
+    text-align: center;
+  }
+.stop {
+  margin: 50px 0px 20px;
+  width: 150px;
+  font-size: 30px;
+  background-color: rgb(10, 108, 236);
+  border: none;
+}
+.stop:hover {
+  background-color: rgb(228, 17, 9);
+}
+
 </style>
 <body class="w3-black">
 
@@ -58,25 +83,62 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
   <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
     <h1 class="w3-jumbo"><span class="w3-hide-small">DAIR Perception</span></h1>
-    <h2>QMIND</h2>
-    
+    <h2>Robot Launch</h2>
   </header>
 
-  <div class="w3-center" id="dropdown">
-    <h3>Objects</h3>  
-    <label for="objects">Choose an object:</label>
+  <div class="w3-center" id="buttons">
+    <h2>Choose an object for the robot to find:</h2>
+    <div></div>
     
-    <select id="objects">
-      <option value="clock">Clock</option>
-      <option value="bottle">Bottle</option>
-      <option value="giraffe">Giraffe</option>
-      <option value="pottedplant">Plant</option>
-    </select>
+    <table class="w3-center">
+      <tr>
+        <td>
+          <form action="{% url 'launchClock' %}" method="POST">
+            {% csrf_token %}
+            <button class="button" type="submit">Clock</button>
+          </form>
+        </td>
+        <td>
+          <form action="{% url 'launchBottle' %}" method="POST">
+            {% csrf_token %}
+            <button class="button" type="submit">Bottle</button>
+          </form>
+        </td>
+        <td>
+          <form action="{% url 'launchGiraffe' %}" method="POST">
+            {% csrf_token %}
+            <button class="button" type="submit">Giraffe</button>
+          </form>
+        </td>
+        <td>
+          <form action="{% url 'launchPlant' %}" method="POST">
+            {% csrf_token %}
+            <button class="button" type="submit">Plant</button>
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <td>
+            <img src="{% static 'main/images/clock.jpg' %}" style="width:75%"> 
+        </td>
+        <td>
+            <img src="{% static 'main/images/bottle.jpg' %}" style="width:75%"> 
+        </td>
+        <td>
+            <img src="{% static 'main/images/giraffe.jpg' %}" style="width:75%"> 
+        </td>
+        <td>
+            <img src="{% static 'main/images/plant.jpg' %}" style="width:75%"> 
+        </td>
+      </tr>
+    </table>
 
-    <form action="{% url 'launch' %}" method="POST">
-      {% csrf_token %}
-      <button type="submit">Launch</button>
-  </form>
+    <div> 
+      <form action="{% url 'stop' %}" method="POST">
+        {% csrf_token %}
+        <button class="stop" type="submit">Stop</button>
+      </form>
+    </div>
 
   </div>
 

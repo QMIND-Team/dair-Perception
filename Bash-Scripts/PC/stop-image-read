@@ -9,3 +9,6 @@ cd ~/dair-Perception/ROS/demo/src/image_processing_py/src/
 # Read PID and kill process
 PID=$(head -1 imagePID.txt)
 eval kill -9 $PID
+
+# Kill movement as well
+eval stop-movement
