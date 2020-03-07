@@ -17,6 +17,13 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 #main {margin-left: 120px}
 /* Remove margins from "page content" on small screens */
 @media only screen and (max-width: 600px) {#main {margin-left: 0}}
+.description {
+  width: 75%;
+  margin: auto;
+}
+.photo {
+  margin: 10px 0px 20px;
+}
 </style>
 <body class="w3-black">
 
@@ -65,24 +72,24 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <!-- Grid for photos -->
 <div class="w3-row-padding w3-center" style="margin:0 -16px">
     <div class="w3-center">
-      <img src="{% static 'main/images/yolo-visual.PNG' %}" style="width:75%"> 
-      <p> <b>The YOLO Detection System:</b> The YOLO model is an approach to object detection where the image is passed through
+      <img class="photo" src="{% static 'main/images/yolo-visual.PNG' %}" style="width:75%"> 
+      <p class="description"> <b>The YOLO Detection System:</b> The YOLO model is an approach to object detection where the image is passed through
              a single neural network. Using this unified implementation for object detection, the system only has to look once (YOLO)
              to make accurate predictions.  </p>
-      <img src="{% static 'main/images/yolov3-accuracy-vs-time.PNG' %}" style="width:75%">
-      <p> YOLO's single pass regression system that doesn't require complex pipelines enables it to perform at unparalleled
+      <img class="photo" src="{% static 'main/images/yolov3-accuracy-vs-time.PNG' %}" style="width:75%">
+      <p class="description"> YOLO's single pass regression system that doesn't require complex pipelines enables it to perform at unparalleled
           speeds. In addition, the approach of passing the entire image through the model (as opposed to sliding window and regional-based
           solutions) decreases the amount of background errors. The speed and accuracy in high-context environments makes it an ideal model
           for real-time object detection on our robot.
       </p>
-      <img src="{% static 'main/images/ros-visual.png' %}" style="width:75%">
-      <p> In order to develop an effective real-time solution on the robot, we designed nodes in ROS (Robot Operating System) for the computer, 
+      <img class="photo" src="{% static 'main/images/ros-visual.png' %}" style="width:75%">
+      <p class="description"> In order to develop an effective real-time solution on the robot, we designed nodes in ROS (Robot Operating System) for the computer, 
           robot and sensors to exchange data. Data from the camera and LiDAR sensor are published to nodes through ROS, and the python scripts
           subscribe to this information. The scripts make decisions on the newest data based off the neural network and movement algorithms, addition
           decide how they want to control the robot. Desicions are published to new nodes, where the robot motors can read and execute the data.
       </p>
-      <img src="{% static 'main/images/coco.png' %}" style="width:75%"> 
-      <p> We wanted to train our object detection model on a labelled dataset that showcased objects in dynamic and context-rich environments. COCO 
+      <img class="photo" src="{% static 'main/images/coco.png' %}" style="width:75%"> 
+      <p class="description"> We wanted to train our object detection model on a labelled dataset that showcased objects in dynamic and context-rich environments. COCO 
           consists of exactly that, a collection of common objects in real environments. By selecting the classes we wanted to train our model on, we
           were able to fine tune the object detection to perform for our given use cases.
       </p>
